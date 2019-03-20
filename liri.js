@@ -23,11 +23,11 @@ var spotify = new Spotify(keys.spotify);
 // ============ Movie Code =============// 
 
 if (process.argv[2] === "movie-this") {
-var fullname = "Matrix";
-
-var axios = require("axios");
-
-axios.get("http://www.omdbapi.com/?t=" + fullname + "&y=&plot=short&apikey=337d7ea4").then(
+  if(process.argv[3] === undefined){
+  var fullname = "Mr. Nobody";
+  var axios = require("axios");
+  axios.get("http://www.omdbapi.com/?t=" + fullname + "&y=&plot=short&apikey=337d7ea4")
+  .then(
   function (response) {
    console.log(response.data.Title);
    console.log(response.data.Year);
@@ -36,11 +36,26 @@ axios.get("http://www.omdbapi.com/?t=" + fullname + "&y=&plot=short&apikey=337d7
    console.log(response.data.Country);
    //  I am not sure where to get the rotten tomatoes rating data (skipping for now!)
    //console.log(response.data.Ratings);
-    
-
-
   })
-}
+  }
+  else{
+    console.log(process.argv[3]);
+    var fullname = process.argv[3];
+  var axios = require("axios");
+  axios.get("http://www.omdbapi.com/?t=" + fullname + "&y=&plot=short&apikey=337d7ea4")
+  .then(
+  function (response) {
+   console.log(response.data.Title);
+   console.log(response.data.Year);
+   console.log(response.data.imdbRating);
+   console.log(response.data.Language);
+   console.log(response.data.Country);
+   //  I am not sure where to get the rotten tomatoes rating data (skipping for now!)
+   //console.log(response.data.Ratings);
+  })
+  }
+  }
+
 
 
 // ======== Spotify Code =========== //
